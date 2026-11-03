@@ -522,9 +522,16 @@ async def _handle_run_vulnerability_scan(
 
     lines = []
     cache_note = " (cached results)" if status == "cached" else ""
-    lines.append(
-        f"Vulnerability scan complete{cache_note}\n"
-    )
+    if status == "partial":
+        lines.append("Vulnerability scan INCOMPLETE\n")
+        lines.append(
+            f"NVD gave no answer for {summary['failed_components']} component(s): "
+            "their CVEs are unknown, not absent. Run the scan again to retry them."
+        )
+    else:
+        lines.append(
+            f"Vulnerability scan complete{cache_note}\n"
+        )
     lines.append(f"Components scanned (with CPE): {total_scanned}")
     lines.append(f"Total vulnerabilities found: {total_vulns}")
 

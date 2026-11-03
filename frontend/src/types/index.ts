@@ -252,6 +252,7 @@ export interface VulnerabilityScanResult {
   total_vulnerabilities_found: number
   findings_created: number
   vulns_by_severity: Record<string, number>
+  failed_components?: number
 }
 
 // ── Document types ──

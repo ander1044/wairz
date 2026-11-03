@@ -339,6 +339,7 @@ export default function SbomPage() {
           {scanResult && !scanning && (
             <span className="text-xs text-muted-foreground">
               Found {scanResult.total_vulnerabilities_found} CVEs across {scanResult.total_components_scanned} components
+              {!!scanResult.failed_components && ` \u00b7 NVD gave no answer for ${scanResult.failed_components} components: their CVEs are unknown, scan again to retry`}
               {scanResult.findings_created > 0 && ` \u00b7 ${scanResult.findings_created} findings created`}
             </span>
           )}
