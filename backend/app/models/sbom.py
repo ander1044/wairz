@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import ForeignKey, Index, Numeric, String, Text, func, text
+from sqlalchemy import Boolean, ForeignKey, Index, Numeric, String, Text, func, text
 from sqlalchemy.dialects.postgresql import ARRAY, JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -32,6 +32,9 @@ class SbomComponent(Base):
     file_paths: Mapped[list[str] | None] = mapped_column(ARRAY(Text))
     metadata_: Mapped[dict] = mapped_column(
         "metadata", JSONB, server_default=text("'{}'")
+    )
+    nvd_query_failed: Mapped[bool] = mapped_column(
+        Boolean, server_default=text("false"), nullable=False
     )
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())
 

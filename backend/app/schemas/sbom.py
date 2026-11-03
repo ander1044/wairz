@@ -89,6 +89,7 @@ class VulnerabilityScanResponse(BaseModel):
     total_vulnerabilities_found: int
     findings_created: int
     vulns_by_severity: dict[str, int]
+    failed_components: int = 0
 
 
 class SbomSummaryResponse(BaseModel):
